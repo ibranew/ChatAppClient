@@ -208,7 +208,12 @@ label {
   }
   
   .conversation-list li.join-selected {
-    background-color: #530a87; /* İkinci seçim için farklı renk */
+    background-color: #530a87;
+    color : white;
+  }
+
+  .conversation-list li.selected {
+    background-color: #8222c7; 
     color : white;
   }
 

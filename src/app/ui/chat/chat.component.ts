@@ -99,10 +99,13 @@ export class ChatComponent implements OnInit{
       return;
     this.messagesService.setSelectedClient(client);
     this.conversationLabel = client;
+    this.selectedClientName = client;
     this.selectedGroup = null;
   }
   onRoomSelect(group: Group) {
     this.messagesService.setSelectedGroup(group);
+    this.selectedClientName = "",
+    this.selectedGroup = group;
     this.conversationLabel = group.name;
     this.clientsService.getClientShown(group).subscribe((clients: string[]) => {
       this.clients = clients;

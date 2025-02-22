@@ -115,6 +115,7 @@ button:disabled {
 .chat-panel {
     width: 54%;
     padding: 15px;
+   
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -129,6 +130,7 @@ button:disabled {
     border-radius: 6px;
     font-size: 16px;
     line-height: 1.5;
+    margin-bottom: 15px;
     max-height: 60vh; /* Mesajlar için belirli bir yükseklik ve kaydırma sağlar */
 }
 
@@ -180,6 +182,7 @@ label {
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: white;
+    
 }
 
 .conversation-list {
@@ -194,7 +197,8 @@ label {
     cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: left;
+    gap: 5px;;
     border-bottom: 1px solid #ddd;
   }
   
@@ -203,13 +207,8 @@ label {
     color: white;
   }
   
-  .conversation-list li.selected {
-    background-color: #530a87;
-    color: white;
-  }
-  
   .conversation-list li.join-selected {
-    background-color: #71617c; /* İkinci seçim için farklı renk */
+    background-color: #530a87; /* İkinci seçim için farklı renk */
     color : white;
   }
 
@@ -217,10 +216,27 @@ label {
     background-color: red;
     color: white;
     border-radius: 50%;
-    padding: 2px 6px;
-    font-size: 16px;
-    margin-left: 10px;
+    padding: 1px 9px;
+    font-size: 14px;
+    margin-left: 8px;
   }
+  .client-online {
+    width: 10px;
+    margin-right: 8px;
+    height: 10px;
+    background-color: #28a745; /* Yeşil renk */
+    border-radius: 50%; /* Yuvarlak yap */
+    display: inline-block;
+  }
+  .client-offline {
+    width: 10px;
+    height: 10px;
+    background-color: #5f7163; /* Yeşil renk */
+    border-radius: 50%; /* Yuvarlak yap */
+    display: inline-block;
+  }
+  
+
   .conversation-list.disabled {
     pointer-events: none; /* Tıklamayı engeller */
     opacity: 0.5; /* Grileştirerek disable hissiyatı verir */

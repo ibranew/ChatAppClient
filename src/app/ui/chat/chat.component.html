@@ -1,0 +1,75 @@
+<div class="chat-wrapper">
+    <!-- Bildirim Bölgesi -->
+    <div [ngClass]="notifyClass">
+        <label class="notify-label">{{ notificationText }}</label>
+    </div>         
+
+    <div class="chat-container">
+        <!-- Sol Panel -->
+        <div class="left-panel">
+            <input type="text" [(ngModel)]="addGroupName" placeholder="Oda adı" class="room-input">
+            <button class="create-room" [disabled]="!userName" (click)="addGroup()">Oda Oluştur</button>
+
+            <label>Odalar</label>
+            <div class="list-dropdown">
+                <ul class="conversation-list">
+                    <li *ngFor="let group of groups"  
+                        (click)="userName ? onRoomSelect(group) : null"
+                        [class.join-selected]="selectedGroup?.name === group.name"
+                        [class.disabled]="!userName">
+                        {{ group.name }}
+                        <span *ngIf="group.memberNames.includes(userName)" class="joined-indicator">✔</span>
+                        <span *ngIf="_unreadCounts[group.id]" class="unread-count">
+                            {{ _unreadCounts[group.id] }}
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            
+            <button class="join-room" [disabled]="!userName" (click)="joinGroup()">Seçili Odaya Gir</button>
+
+            <label>{{ membersLabel }}</label>
+            <div class="list-dropdown">
+                <ul class="conversation-list">
+                    <li *ngFor="let client of clients"  
+                        (click)="userName ? onClientSelect(client) : null"
+                        [class.selected]="selectedClientName === client"
+                        [class.disabled]="!userName">
+                        <span class="client-online"></span>
+                        {{ client }}
+                        <span *ngIf="client === userName">
+                          (sen)
+                        </span>
+                        <span *ngIf="_unreadCounts[client]" class="unread-count">
+                            {{ _unreadCounts[client] }}
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Orta Panel (Mesaj Alanı) -->
+        <div class="chat-panel">
+            <label>{{ conversationLabel }}</label>
+
+            <div class="messages">
+                <div *ngFor="let message of messages" [class.self]="message.sender === 'Sen'" class="message">
+                    <strong>{{ message.sender }}:</strong> {{ message.text }}
+                </div>
+            </div>
+
+            <div class="message-input">
+                <input type="text" [(ngModel)]="newMessage" placeholder="Mesajınızı yazın...">
+                <button (click)="sendMessage()" [disabled]="isSendDisabled">Gönder</button>
+            </div>
+        </div>
+
+        <!-- Sağ Panel -->
+        <div class="right-panel">
+            <input type="text" #clientNameInput placeholder="İsminizi girin" class="name-input">
+            <button class="login" (click)="addUser(clientNameInput.value)" [disabled]="userName">Giriş Yap</button>
+            <label *ngIf="userName">Kullanıcı Adınız: {{ userName }}</label>
+            <button class="login" (click)="leaveUser()" *ngIf="userName">Çıkış yap</button>
+        </div>
+    </div>    
+</div>

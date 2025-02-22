@@ -15,10 +15,12 @@ export class ClientsService {
  
   constructor(private signalRService : ChatSignalRService) {
     this.initSignalRHandlers();
-    this._UserName.subscribe(username=>{ 
-      if (!this._clients?.includes(username))
+    this._UserName.subscribe(username => { 
+      if (!this._clients?.includes(username) && username !== '') { 
         this._UserName.next('');
-    })
+      }
+    });
+    
   }
 
   //gruptaki değişiklikleri dinliyoruz
